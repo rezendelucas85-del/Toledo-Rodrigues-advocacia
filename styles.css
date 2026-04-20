@@ -186,6 +186,16 @@ footer {
 /* Sobre */
 #sobre {
     padding: 80px 0;
+    background-image: url('sobre-fundo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#sobre .container {
+    background-color: rgba(255, 255, 255, 0.94);
+    padding: 40px;
+    border-radius: 14px;
 }
 
 .historia, .equipe, .diferenciais {
