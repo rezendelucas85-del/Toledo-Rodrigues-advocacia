@@ -307,18 +307,106 @@ button:hover {
 
 /* Responsividade */
 @media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    header .container {
+        padding: 0 15px;
+    }
+
+    .logo h1 {
+        font-size: 1.5em;
+    }
+
+    .logo p {
+        font-size: 0.8em;
+    }
+
     nav ul {
         flex-direction: column;
         align-items: center;
     }
+
     nav li {
         margin: 10px 0;
     }
-    #banner h2 {
-        font-size: 2em;
+
+    #banner {
+        padding: 80px 0;
+        min-height: 50vh;
     }
+
+    #banner .container {
+        padding: 20px;
+    }
+
+    #banner h2 {
+        font-size: 1.8em;
+    }
+
+    #banner p {
+        font-size: 1em;
+    }
+
     .servicos-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .servico {
+        padding: 20px;
+    }
+
+    blockquote {
+        font-size: 1.2em;
+    }
+
+    #areas .container {
+        padding: 30px;
+    }
+
+    #sobre .container {
+        padding: 30px;
+    }
+
+    #contato .container {
+        padding: 30px;
+    }
+
+    form {
+        max-width: 100%;
+    }
+
+    footer .container {
+        padding: 0 15px;
+    }
+
+    footer p {
+        font-size: 0.9em;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    #banner h2 {
+        font-size: 2.2em;
+    }
+
+    #banner p {
+        font-size: 1.1em;
+    }
+
+    .servicos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    blockquote {
+        font-size: 1.4em;
     }
 }
 
