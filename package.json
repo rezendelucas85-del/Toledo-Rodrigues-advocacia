@@ -1,0 +1,13 @@
+{
+  "name": "toledo-rodrigues-advocacia",
+  "version": "1.0.0",
+  "description": "Site de advocacia com backend Node e banco SQLite para formulário de contato.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6"
+  }
+}
