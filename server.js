@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const crypto = require('crypto');
 const sqlite3 = require('sqlite3').verbose();
 
 const app = express();
@@ -22,9 +23,26 @@ db.serialize(() => {
       email TEXT NOT NULL,
       assunto TEXT NOT NULL,
       mensagem TEXT NOT NULL,
+      message_hash TEXT NOT NULL,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
   `);
+
+  db.all(`PRAGMA table_info(contacts)`, (err, rows) => {
+    if (err) {
+      console.error('Erro ao verificar esquema do banco de dados:', err.message);
+      return;
+    }
+
+    const hasHashColumn = rows.some((row) => row.name === 'message_hash');
+    if (!hasHashColumn) {
+      db.run(`ALTER TABLE contacts ADD COLUMN message_hash TEXT NOT NULL DEFAULT ''`, (alterErr) => {
+        if (alterErr) {
+          console.error('Erro ao atualizar esquema do banco de dados:', alterErr.message);
+        }
+      });
+    }
+  });
 });
 
 app.use(express.json());
@@ -37,8 +55,9 @@ app.post('/api/contact', (req, res) => {
     return res.status(400).json({ error: 'Preencha todos os campos.' });
   }
 
-  const stmt = db.prepare(`INSERT INTO contacts (nome, email, assunto, mensagem) VALUES (?, ?, ?, ?)`);
-  stmt.run(nome, email, assunto, mensagem, function (err) {
+  const messageHash = crypto.createHash('sha256').update(mensagem).digest('hex');
+  const stmt = db.prepare(`INSERT INTO contacts (nome, email, assunto, mensagem, message_hash) VALUES (?, ?, ?, ?, ?)`);
+  stmt.run(nome, email, assunto, mensagem, messageHash, function (err) {
     if (err) {
       console.error('Erro ao salvar contato:', err.message);
       return res.status(500).json({ error: 'Erro interno ao salvar a mensagem.' });
