@@ -62,18 +62,22 @@ nav a:hover {
 }
 
 /* Banner */
-#banner {
-    padding: 100px 0;
-    text-align: center;
-    background-color: #f9f9f9;
+body.home {
     background-image: url('home-fundo.jpg');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#banner {
+    padding: 120px 0;
+    min-height: 70vh;
+    text-align: center;
+    background-color: transparent;
 }
 
 #banner .container {
-    background-color: rgba(249, 249, 249, 0.9);
+    background-color: rgba(249, 249, 249, 0.92);
     padding: 40px;
     border-radius: 14px;
 }
